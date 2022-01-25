@@ -13,13 +13,16 @@ const MovieLibrary: React.FC = () => {
   return (
     <Container>
       {data.movies.map(
-        ({ id, title, release_date, poster_path, vote_average }) => (
+        ({ id, title, release_date, poster_path, vote_average,overview,original_language,popularity }) => (
           <MovieItem
             key={id}
             src={`${poster_path}`}
             title={`${title}`}
             vote_average={`${vote_average}`}
             release_date={`${release_date}`}
+            overview={`${overview}`}
+            original_language={`${original_language}`}
+            popularity={`${popularity}`}
           />
         )
       )}

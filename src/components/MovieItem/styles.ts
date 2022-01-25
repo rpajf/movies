@@ -42,3 +42,14 @@ export const OverviewButton = styled.button`
     text-shadow: 2px 1.5px 3px rgba(245, 181, 15, 0.75);
   }
 `;
+export const ModalBox = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px;
+`;
+export const ModalHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0;
+`;
