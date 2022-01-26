@@ -1,14 +1,14 @@
 import React, { ReactNode } from 'react';
 
-import { Container } from './styles';
+import { Container, Text } from './styles';
 
-interface CustomTextProps {
+export interface CustomTextProps {
   textColor?: string;
   size?: string;
   weight?: number;
-  children: string | ReactNode[]|undefined;
+  children: string | ReactNode[] | undefined;
   spacing?: string;
-  lineHeight?:string
+  lineHeight?: string;
 }
 const CustomText: React.FC<CustomTextProps> = ({
   size,
@@ -16,17 +16,19 @@ const CustomText: React.FC<CustomTextProps> = ({
   weight,
   children,
   spacing,
-  lineHeight
+  lineHeight,
 }) => {
   return (
-    <Container
-      size={size}
-      textColor={textColor}
-      weight={weight}
-      lineHeight={lineHeight}
-      spacing={spacing}
-    >
-      {children}
+    <Container>
+      <Text
+        size={size}
+        textColor={textColor}
+        weight={weight}
+        lineHeight={lineHeight}
+        spacing={spacing}
+      >
+        {children}
+      </Text>
     </Container>
   );
 };

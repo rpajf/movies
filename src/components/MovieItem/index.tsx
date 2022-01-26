@@ -31,7 +31,7 @@ const MovieItem: React.FC<MovieItem> = ({
     <Container>
       <MovieImg
         style={{
-          backgroundImage: `url(https://image.tmdb.org/t/p/w500/${src})`,
+          backgroundImage: `url(https://image.tmdb.org/t/p/w500${src})`,
         }}
       />
       <Content>

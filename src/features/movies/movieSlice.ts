@@ -1,36 +1,60 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {  IState } from './types';
+import { createSlice, current } from '@reduxjs/toolkit';
+import { IState } from './types';
 
 import moviesData from '../../mocks/topTatedMovies.json';
 
 const initialState: IState = {
   movies: moviesData,
 };
-let moviesRating = moviesData.map(({ vote_average }) => vote_average);
-console.log(moviesRating);
-// const fetchMovies = createAsyncThunk(`/movies`, async () => {
-//   return moviesData;
-// });
+
+const _sortByAz = (a: any, b: any) => {
+  if (a.title < b.title) {
+    return -1;
+  }
+  if (a.title > b.title) {
+    return 1;
+  }
+  return 0;
+};
+const _sortByZa = (a: any, b: any) => {
+  if (a.title < b.title) {
+    return 1;
+  }
+  if (a.title > b.title) {
+    return -1;
+  }
+  return 0;
+};
+const _sortByRating = (a: any, b: any) => {
+  if (a.vote_average < b.vote_average) {
+    return -1;
+  }
+  if (a.vote_average > b.vote_average) {
+    return 1;
+  }
+  return 0;
+};
+
 const movieSlice = createSlice({
   name: 'movies',
   initialState,
   reducers: {
-    // export const getMovies = state => state.movieLib.movies
-    listAll: (state: IState, { payload }) => {
-      console.log('ratingasd', moviesRating);
-      console.log('payload', payload);
-      return {
-        ...state,
-        movies: [...state.movies, payload],
-      };
+    sortByAz: (state) => {
+      const parsedState = current(state);
+
+      state.movies = parsedState.movies.slice().sort(_sortByAz);
+    },
+    sortByZa: (state) => {
+      const parsedState = current(state);
+
+      state.movies = parsedState.movies.slice().sort(_sortByZa);
+    },
+    sortByRating: (state) => {
+      const parsedState = current(state);
+
+      state.movies = parsedState.movies.slice().sort(_sortByRating);
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(
-  //     fetchMovies.fulfilled,
-  //     (state, action) => (state.movies = action.payload)
-  //   );
-  // },
 });
-export const { listAll } = movieSlice.actions;
+export const { sortByAz, sortByZa, sortByRating } = movieSlice.actions;
 export default movieSlice.reducer;

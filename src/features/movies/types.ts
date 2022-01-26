@@ -18,9 +18,7 @@ export interface IMovie {
   src?: string;
 }
 
-// export interface IMovieItem extends IMovie {
-//   movie?: IMovie[];
-// }
+
 export interface IState {
   movies: movieDataType;
 }
