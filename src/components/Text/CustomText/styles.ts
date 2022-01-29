@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 import { CustomTextProps } from '.';
 
-export const Container = styled.div``
+export const Container = styled.div`
+  max-width: 350px;
+`;
 
 export const Text = styled.text<CustomTextProps>`
   color: ${(props) => props.textColor};

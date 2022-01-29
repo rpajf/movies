@@ -1,10 +1,10 @@
-type movieDataType = typeof import('../../mocks/topTatedMovies.json');
+export type movieDataType = typeof import('../../mocks/topTatedMovies.json');
 export interface IMovie {
   vote_count?: string;
   id?: string;
   video?: boolean;
   vote_average?: string;
-  title: string;
+  title?: string;
   popularity?: string;
   poster_path?: string;
   original_language?: string;
@@ -14,11 +14,17 @@ export interface IMovie {
   adult?: boolean;
   overview?: string;
   release_date?: string;
-  key: number;
+  key?: number;
   src?: string;
+  
 }
 
-
 export interface IState {
-  movies: movieDataType;
+  value: movieDataType;
+  total_results?: number;
+  page?: number;
+  total_pages?: number;
+  status?: 'idle'| 'success'| 'loading'| 'failed';
+  error?: string|null
+
 }

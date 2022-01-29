@@ -1,11 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
-import movieReducer from '../features/movies/movieSlice';
+import { configureStore, Action } from '@reduxjs/toolkit';
+import {  ThunkAction } from 'redux-thunk';
+import {movieSlice} from '../features/movies/movieSlice';
 
 export const store = configureStore({
-  reducer: {
-    movie: movieReducer,
-  },
+  reducer: movieSlice.reducer,
 });
+
 
 export type AppDispatch = typeof store.dispatch;
 //export the type of the function store.dispatch to be reused

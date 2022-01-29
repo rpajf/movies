@@ -1,7 +1,6 @@
 import React from 'react';
 import { CustomText } from '../Text';
 import { Container, HeaderContent } from './styles';
-// import Select from '../Select';
 
 const Header: React.FC = () => {
   return (
@@ -18,7 +17,6 @@ const Header: React.FC = () => {
           <CustomText spacing="0.5px" weight={500} textColor="#fff" size="22px">
             by Raphael
           </CustomText>
-          {/* <Select /> */}
         </CustomText>
       </HeaderContent>
     </Container>
