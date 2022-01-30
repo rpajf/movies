@@ -41,42 +41,43 @@ const MovieLibrary: React.FC = () => {
   }, []);
 
   return (
-    <Container>
-      <Select setValue={setSelectValue} />
+    <>
+      {data.status === 'loading' ? (
+        <Spinner status={data.status} />
+      ) : data.status === 'success' ? (
+        <Container>
+          <Select setValue={setSelectValue} />
 
-      <Content>
-        {data.status === 'loading' ? (
-          <Spinner status={data.status} />
-        ) : data.status === 'success' ? (
-          
-          data.value.map(
-            ({
-              id,
-              title,
-              release_date,
-              poster_path,
-              vote_average,
-              overview,
-              original_language,
-              popularity,
-            }) => (
-              <MovieItem
-                key={`${id}`}
-                src={`${poster_path}`}
-                title={`${title}`}
-                vote_average={`${vote_average}`}
-                release_date={`${release_date}`}
-                overview={`${overview}`}
-                original_language={`${original_language}`}
-                popularity={`${popularity}`}
-              />
-            )
-          )
-        ) : data.status === 'idle' ? null : (
-          <ErrorMessage content={`${data.error}`} />
-        )}
-      </Content>
-    </Container>
+          <Content>
+            {data.value.map(
+              ({
+                id,
+                title,
+                release_date,
+                poster_path,
+                vote_average,
+                overview,
+                original_language,
+                popularity,
+              }) => (
+                <MovieItem
+                  key={`${id}`}
+                  src={`${poster_path}`}
+                  title={`${title}`}
+                  vote_average={`${vote_average}`}
+                  release_date={`${release_date}`}
+                  overview={`${overview}`}
+                  original_language={`${original_language}`}
+                  popularity={`${popularity}`}
+                />
+              )
+            )}
+          </Content>
+        </Container>
+      ) : data.status === 'idle' ? null : (
+        <ErrorMessage content={`${data.error}`} />
+      )}
+    </>
   );
 };
 

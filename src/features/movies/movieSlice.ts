@@ -8,8 +8,7 @@ const initialState: IState = {
   status: 'idle',
   total_results: 0,
   total_pages: 1,
-  error: null,
-
+  error: '',
 };
 
 const api_key = process.env.REACT_APP_TMDB_API;
@@ -96,8 +95,7 @@ export const movieSlice = createSlice({
 
     builder.addCase(getMovies.rejected, (state, action) => {
       state.status = 'failed';
-      state.error = action.error.message
-
+      state.error = action.error.message;
     });
   },
 });

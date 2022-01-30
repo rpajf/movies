@@ -16,7 +16,6 @@ export interface IMovie {
   release_date?: string;
   key?: number;
   src?: string;
-  
 }
 
 export interface IState {
@@ -24,7 +23,6 @@ export interface IState {
   total_results?: number;
   page?: number;
   total_pages?: number;
-  status?: 'idle'| 'success'| 'loading'| 'failed';
-  error?: string|null
-
+  status?: 'idle' | 'success' | 'loading' | 'failed';
+  error?: string 
 }
