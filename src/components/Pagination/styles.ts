@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  align-self: center;
-  display: inline-block;
+
+  position: fixed;
+  right: 95%;
 `;

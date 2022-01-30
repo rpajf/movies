@@ -1,25 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import {
   getMovies,
   sortByAz,
   sortByRating,
   sortByZa,
 } from '../../features/movies/movieSlice';
-import Spinner from '../Spinner';
-import ErrorMessage from '../Error';
 
+import ErrorMessage from '../Error';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Pagination from '../Pagination';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import MovieItem from '../MovieItem';
 import Select from '../Select';
 import { Container, Content } from './styles';
 
 const MovieLibrary: React.FC = () => {
-  const [selectValue, setSelectValue] = useState<string>();
-
   const data = useAppSelector((state) => {
-    console.log('estado', state.total_results);
     return state;
   });
+  const [selectValue, setSelectValue] = useState<string>('');
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -33,51 +34,58 @@ const MovieLibrary: React.FC = () => {
   }, [selectValue]);
 
   useEffect(() => {
-    if (data.status === 'idle') {
-      dispatch(getMovies({ page: 1 }));
-      dispatch(getMovies({ page: 2 }));
-      dispatch(getMovies({ page: 3 }));
-    }
-  }, []);
+    dispatch(getMovies({ page: currentPage }));
+  }, [currentPage]);
 
   return (
-    <>
-      {data.status === 'loading' ? (
-        <Spinner status={data.status} />
-      ) : data.status === 'success' ? (
-        <Container>
-          <Select setValue={setSelectValue} />
+    <Container>
+      <Select setValue={setSelectValue} />
+      <Pagination pageNum={currentPage} totalPages={data.total_pages} />
 
-          <Content>
-            {data.value.map(
-              ({
-                id,
-                title,
-                release_date,
-                poster_path,
-                vote_average,
-                overview,
-                original_language,
-                popularity,
-              }) => (
-                <MovieItem
-                  key={`${id}`}
-                  src={`${poster_path}`}
-                  title={`${title}`}
-                  vote_average={`${vote_average}`}
-                  release_date={`${release_date}`}
-                  overview={`${overview}`}
-                  original_language={`${original_language}`}
-                  popularity={`${popularity}`}
-                />
-              )
-            )}
-          </Content>
-        </Container>
-      ) : data.status === 'idle' ? null : (
-        <ErrorMessage content={`${data.error}`} />
-      )}
-    </>
+      <Content>
+        {data.status === 'failed' && (
+          <ErrorMessage status={`${data.status}`} content="Error" />
+        )}
+        <InfiniteScroll
+          pullDownToRefresh={false}
+          pullDownToRefreshContent={false}
+          dataLength={currentPage * 20} //This is important field to render the next data
+          next={() => setCurrentPage((prev) => prev + 1)}
+          hasMore={currentPage < data.total_pages}
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}
+          loader={<h2>Loading....</h2>}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>You have seen all Movies </b>
+            </p>
+          }
+        >
+          {data.value.map(
+            ({
+              id,
+              title,
+              release_date,
+              poster_path,
+              vote_average,
+              overview,
+              original_language,
+              popularity,
+            }) => (
+              <MovieItem
+                key={`${id}`}
+                src={`${poster_path}`}
+                title={`${title}`}
+                vote_average={`${vote_average}`}
+                release_date={`${release_date}`}
+                overview={`${overview}`}
+                original_language={`${original_language}`}
+                popularity={`${popularity}`}
+              />
+            )
+          )}
+        </InfiniteScroll>
+      </Content>
+    </Container>
   );
 };
 

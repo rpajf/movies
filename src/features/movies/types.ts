@@ -20,9 +20,9 @@ export interface IMovie {
 
 export interface IState {
   value: movieDataType;
-  total_results?: number;
-  page?: number;
-  total_pages?: number;
+  total_results: number;
+  page: number;
+  total_pages: number;
   status?: 'idle' | 'success' | 'loading' | 'failed';
   error?: string 
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 24px 32px 0;
+  margin: 0 24px 40px 0;
 `;
 
 export const Content = styled.div`
@@ -16,7 +16,7 @@ export const MovieImg = styled.div`
   display: inline-flex;
   flex-direction: column;
   border-radius: 12px;
-
+  background: #c9c9c9;
   align-items: center;
   justify-content: center;
   height: 170px;

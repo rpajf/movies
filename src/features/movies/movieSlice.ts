@@ -13,19 +13,19 @@ const initialState: IState = {
 
 const api_key = process.env.REACT_APP_TMDB_API;
 
+// export const getMovies = createAsyncThunk<IState>(
 export const getMovies = createAsyncThunk<IState, { page: number }>(
   'movies/getMovies',
   async (payload, { rejectWithValue, getState, dispatch }) => {
     try {
-      console.log('page', payload.page);
       const { data } = await api.get(
         `movie/now_playing?api_key=${api_key}&page=${payload.page}`
       );
-
+      console.log('payload page', payload.page);
       return {
         value: data['results'],
-        total: data['total_results'],
-        page: data['page'],
+        total_results: data['total_results'],
+        page: payload.page,
         total_pages: data['total_pages'],
       };
     } catch (error) {
@@ -33,6 +33,7 @@ export const getMovies = createAsyncThunk<IState, { page: number }>(
     }
   }
 );
+
 
 const _sortByAz = (a: any, b: any) => {
   if (a.title < b.title) {
@@ -91,6 +92,9 @@ export const movieSlice = createSlice({
     builder.addCase(getMovies.fulfilled, (state, { payload }) => {
       state.status = 'success';
       state.value = [...new Set(state.value.concat(payload.value))];
+      state.total_results = payload.total_results;
+      state.total_pages = payload.total_pages;
+      state.page = payload.page;
     });
 
     builder.addCase(getMovies.rejected, (state, action) => {

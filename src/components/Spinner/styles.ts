@@ -1,10 +1,10 @@
 import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
+  /* display: flex;
   align-self: center;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   margin-top: 20px;
 `;
 const rotate360 = keyframes`

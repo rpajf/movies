@@ -3,21 +3,18 @@ import React from 'react';
 
 import { SelectContainer } from './styles';
 
-interface SelectBox {
+export interface SelectBoxProps {
   element?: HTMLSelectElement;
   value?: string;
   setValue: (newValue: string) => void;
 
+
 }
 
-const Select: React.FC<SelectBox> = ({  setValue }) => {
+const Select: React.FC<SelectBoxProps> = ({setValue }) => {
   return (
-    <SelectContainer>
-      <select
-        defaultValue=""
-
-        onChange={(e) => setValue(e.target.value)}
-      >
+    <SelectContainer >
+      <select defaultValue="" onChange={(e) => setValue(e.target.value)}>
         <option disabled value="">
           Sort By:
         </option>

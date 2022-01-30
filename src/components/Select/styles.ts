@@ -1,12 +1,13 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const SelectContainer = styled.div`
-  position: relative;
+  /* position: relative; */
 
-  margin-right: 24px;
+  margin-bottom: 24px;
+  justify-self: flex-start;
   align-self: flex-start;
   select {
-    background: #2A3140;
+    background: #2a3140;
     position: relative;
     font-weight: 400;
     /* outline: none; */
@@ -15,7 +16,7 @@ export const SelectContainer = styled.div`
     padding: 10px 15px 10px 10px;
     color: #e5e5e5;
     border-radius: 8px;
-    border: 2px solid #A7A7B4;
+    border: 2px solid #a7a7b4;
     -webkit-appearance: none;
     appearance: none;
     :focus {
@@ -24,14 +25,13 @@ export const SelectContainer = styled.div`
     option {
       position: absolute;
       transition: ease-in 1100ms;
-      background: #2A3140;
-
-
+      background: #2a3140;
     }
   }
   span {
+    position: absolute;
 
-    background: #2A3140;
+    background: #2a3140;
     width: 0;
     height: 0;
     top: 45%;
@@ -41,16 +41,13 @@ export const SelectContainer = styled.div`
 
     border-top: 5px solid #000;
     position: absolute;
-    :hover {
-      cursor: none;
-    }
   }
   @media (max-width: 480px) {
     display: flex;
     justify-content: center;
   }
-`
+`;
 
-export const Arrow = styled.span``
-export const Content = styled.select``
-export const Opt = styled.option``
+export const Arrow = styled.span``;
+export const Content = styled.select``;
+export const Opt = styled.option``;
