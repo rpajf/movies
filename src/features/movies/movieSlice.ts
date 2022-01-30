@@ -11,7 +11,7 @@ const initialState: IState = {
   error: '',
 };
 
-const api_key = process.env.REACT_APP_TMDB_API;
+const api_key = '54ffed57deb5a7a8688be4de3007e578';
 
 // export const getMovies = createAsyncThunk<IState>(
 export const getMovies = createAsyncThunk<IState, { page: number }>(
@@ -33,7 +33,6 @@ export const getMovies = createAsyncThunk<IState, { page: number }>(
     }
   }
 );
-
 
 const _sortByAz = (a: any, b: any) => {
   if (a.title < b.title) {
