@@ -1,5 +1,5 @@
 import { createSlice, current, createAsyncThunk } from '@reduxjs/toolkit';
-import { IState } from './types';
+import { IMovie, IState } from './types';
 import api from '../../services/api';
 
 const initialState: IState = {
@@ -13,15 +13,14 @@ const initialState: IState = {
 
 const api_key = '54ffed57deb5a7a8688be4de3007e578';
 
-// export const getMovies = createAsyncThunk<IState>(
 export const getMovies = createAsyncThunk<IState, { page: number }>(
   'movies/getMovies',
-  async (payload, { rejectWithValue, getState, dispatch }) => {
+  async (payload, { rejectWithValue }) => {
     try {
       const { data } = await api.get(
         `movie/now_playing?api_key=${api_key}&page=${payload.page}`
       );
-      console.log('payload page', payload.page);
+
       return {
         value: data['results'],
         total_results: data['total_results'],
@@ -34,7 +33,7 @@ export const getMovies = createAsyncThunk<IState, { page: number }>(
   }
 );
 
-const _sortByAz = (a: any, b: any) => {
+const _sortByAz = (a: IMovie, b: IMovie) => {
   if (a.title < b.title) {
     return -1;
   }
@@ -43,7 +42,7 @@ const _sortByAz = (a: any, b: any) => {
   }
   return 0;
 };
-const _sortByZa = (a: any, b: any) => {
+const _sortByZa = (a: IMovie, b: IMovie) => {
   if (a.title < b.title) {
     return 1;
   }
@@ -52,14 +51,8 @@ const _sortByZa = (a: any, b: any) => {
   }
   return 0;
 };
-const _sortByRating = (a: any, b: any) => {
-  if (a.vote_average < b.vote_average) {
-    return -1;
-  }
-  if (a.vote_average > b.vote_average) {
-    return 1;
-  }
-  return 0;
+const _sortByRating = (a: IMovie, b: IMovie) => {
+  return a.vote_average - b.vote_average;
 };
 
 export const movieSlice = createSlice({
@@ -104,5 +97,3 @@ export const movieSlice = createSlice({
 });
 
 export const { sortByAz, sortByZa, sortByRating } = movieSlice.actions;
-
-export {};
