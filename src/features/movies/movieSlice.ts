@@ -34,22 +34,17 @@ export const getMovies = createAsyncThunk<IState, { page: number }>(
 );
 
 const _sortByAz = (a: IMovie, b: IMovie) => {
-  if (a.title < b.title) {
-    return -1;
-  }
   if (a.title > b.title) {
     return 1;
   }
-  return 0;
+  return -1;
 };
 const _sortByZa = (a: IMovie, b: IMovie) => {
   if (a.title < b.title) {
     return 1;
   }
-  if (a.title > b.title) {
-    return -1;
-  }
-  return 0;
+
+  return -1;
 };
 const _sortByRating = (a: IMovie, b: IMovie) => {
   return a.vote_average - b.vote_average;
