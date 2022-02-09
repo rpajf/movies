@@ -9,7 +9,7 @@ import {
   ModalBox,
   ModalHeader,
 } from './styles';
-import { CustomText } from '../Text';
+import { CustomText } from '../../../../components/Text';
 import MovieModal from '../Modal';
 
 interface MovieItem  {

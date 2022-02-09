@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomText } from '../Text';
+import { CustomText } from '../../../../components/Text';
 import { Container, HeaderContent } from './styles';
 
 const Header: React.FC = () => {

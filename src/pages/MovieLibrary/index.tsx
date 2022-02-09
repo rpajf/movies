@@ -6,12 +6,12 @@ import {
   sortByZa,
 } from '../../features/movies/movieSlice';
 
-import ErrorMessage from '../Error';
+import ErrorMessage from '../../components/Error';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Pagination from '../Pagination';
+import Pagination from './components/Pagination';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import MovieItem from '../MovieItem';
-import Select from '../Select';
+import MovieItem from './components/MovieItem';
+import Select from './components/Select';
 import { Container, Content } from './styles';
 
 const MovieLibrary: React.FC = () => {

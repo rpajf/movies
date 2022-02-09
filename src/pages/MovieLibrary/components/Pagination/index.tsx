@@ -6,7 +6,7 @@ interface PaginationProps {
   pageNum: number;
   totalPages: number;
 }
-import { CustomText } from '../Text';
+import { CustomText } from '../../../../components/Text';
 const Pagination: React.FC<PaginationProps> = ({ pageNum, totalPages }) => {
   return (
     <Container>
